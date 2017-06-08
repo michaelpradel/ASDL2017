@@ -33,11 +33,12 @@ class Code_Completion_Baseline:
         xs = []
         ys = []
         for token_list in token_lists:
-            for idx, token in enumerate(token_list, start=1):
-                token_string = self.token_to_string(token)
-                previous_token_string = self.token_to_string(token_list[idx - 1])
-                xs.append(self.one_hot(previous_token_string))
-                ys.append(self.one_hot(token_string))
+            for idx, token in enumerate(token_list):
+                if idx > 0:
+                    token_string = self.token_to_string(token)
+                    previous_token_string = self.token_to_string(token_list[idx - 1])
+                    xs.append(self.one_hot(previous_token_string))
+                    ys.append(self.one_hot(token_string))
 
         print("x,y pairs: " + str(len(xs)))        
         return (xs, ys)
