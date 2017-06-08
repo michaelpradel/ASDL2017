@@ -31,7 +31,7 @@ def simplify_token(token):
 # load sequences of tokens from files
 def load_tokens(token_dir):
     token_files = [join(token_dir, f) for f in listdir(token_dir) if isfile(join(token_dir, f)) and f.endswith("_tokens.json")]
-    token_lists = [json.load(open(f)) for f in token_files]
+    token_lists = [json.load(open(f, encoding='utf8')) for f in token_files]
     if simplify_tokens:
         for token_list in token_lists:
             for token in token_list:
