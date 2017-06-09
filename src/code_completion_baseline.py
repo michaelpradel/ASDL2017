@@ -1,4 +1,5 @@
 import tflearn
+import numpy
 
 class Code_Completion_Baseline:
 
@@ -65,8 +66,10 @@ class Code_Completion_Baseline:
         previous_token_string = self.token_to_string(prefix[-1])
         x = self.one_hot(previous_token_string)
         y = self.model.predict([x])
-        predicted = y[0].tolist()
-        best_number = predicted.index(max(y[0]))
+        predicted_seq = y[0]
+        if type(predicted_seq) is numpy.ndarray:
+            predicted_seq = predicted_seq.tolist() 
+        best_number = predicted_seq.index(max(predicted_seq))
         best_string = self.number_to_string[best_number]
         best_token = self.string_to_token(best_string)
         return [best_token]
