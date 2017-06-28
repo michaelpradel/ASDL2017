@@ -21,6 +21,8 @@ class Code_Completion_Baseline:
         for token_list in token_lists:
             for token in token_list:
                 all_token_strings.add(self.token_to_string(token))
+        all_token_strings = list(all_token_strings)
+        all_token_strings.sort()
         print("Unique tokens: " + str(len(all_token_strings)))
         self.string_to_number = dict()
         self.number_to_string = dict() 
